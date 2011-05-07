@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en"><head>
+<title>gl64k - the webgl competition</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<style type="text/css">
+	* { margin: 0px; padding:0px; }
+</style>
+</head><body>
+<canvas id="canvas"></canvas>
+<script type="text/javascript" >
+	var gl = (function () {
+		var d=document, w=window, c=d.getElementById('canvas'),
+		gl = c.getContext('experimental-webgl');
+
+		function resize() {
+			c.width = w.innerWidth;
+			c.height = w.innerHeight;
+			gl.viewport(0, 0, c.width, c.height);
+		}; resize(); w.addEventListener('resize', resize, false);
+
+		return gl;
+	})();
+</script>
+<script type="text/javascript" src="mass.js"></script>
+</body></html>
