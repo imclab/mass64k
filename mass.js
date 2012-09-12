@@ -32,11 +32,11 @@ pa.appendChild(el);
 document.body.appendChild(link);
 
 function resize(){
-w=c.width;
-h=c.height;
+w=1024;
+h=1024;
 (w>h)?hd=Math.floor((w-h)/2):hd=0;
 (h>w)?wd=Math.floor((h-w)/2):wd=0;
-uvScale=[1/2048*w,1/2048*h];
+uvScale=[1/1024*w,1/1024*h];
 iCol();
 iDph();
 iComp();
@@ -62,7 +62,7 @@ focus += delta/50;
 focus=Math.max(0.2,Math.min(0.8,focus));
 }
 near=1;
-far=300;
+far=160;
 window.onload=function(){
 iShd();
 iBuf();
@@ -126,25 +126,25 @@ function randMass(){
 var massType = Math.ceil(Math.random(8)*3);
 switch(massType){
 case 1:
-nmass=Math.ceil(Math.random(1)*20);
+nmass=Math.ceil(Math.random(1)*20+5);
 massLenght=Math.ceil((5000*(Math.random(2)+0.1))/nmass);
 speed=Math.random(4)*2+0.5;
 turnInterval=Math.ceil(Math.random(3)*10/speed+2);
-radius=Math.random(11)*50;
+radius=Math.random(11)*50+50;
 break;
 case 2:
-nmass=Math.ceil(Math.random(1)*300);
+nmass=Math.ceil(Math.random(1)*300+5);
 massLenght=Math.ceil((30000*(Math.random(2)+0.1))/nmass);
 speed=Math.random(4)*2+0.5;
 turnInterval=Math.ceil(Math.random(3)*10/speed+2);
-radius=Math.random(11)*100;
+radius=Math.random(11)*50+50;
 break;
 default:
-nmass=Math.ceil(Math.random(1)*500);
+nmass=Math.ceil(Math.random(1)*500+5);
 massLenght=Math.ceil((20000*(Math.random(2)+0.1))/nmass);
 speed=Math.random(4)*2+0.5;
 turnInterval=Math.ceil(Math.random(3)*6/speed);
-radius=Math.random(11)*5;
+radius=Math.random(11)*50+50;
 }
 massPolyCount=0;
 grow=true;
@@ -279,7 +279,7 @@ oldTime=time;
 mProjection=M4x4.makePerspective(50,1,near,far);
 M4x4.makeTranslate3(0,0,0,mWorld);
 M4x4.scale(V3.$(.6,.6,.6),mWorld,mWorld);
-M4x4.makeTranslate3(0,0,-150,mView);
+M4x4.makeTranslate3(0,0,-80,mView);
 orbitY += (X-orbitY)/10;
 orbitZ += (Y-orbitZ)/10;
 M4x4.rotate(orbitY*5,V3.$(0,1,0),mView,mView);
@@ -360,7 +360,7 @@ gl.bindTexture(gl.TEXTURE_2D,rttColor);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
 gl.generateMipmap(gl.TEXTURE_2D);
-gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,2048,2048,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1024,1024,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
 rttColorBuffer=gl.createRenderbuffer();
 gl.bindRenderbuffer(gl.RENDERBUFFER,rttColorBuffer);
 gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,w,h);
@@ -378,7 +378,7 @@ gl.bindTexture(gl.TEXTURE_2D,rttDepth);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
 gl.generateMipmap(gl.TEXTURE_2D);
-gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,2048,2048,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1024,1024,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
 rttDepthBuffer=gl.createRenderbuffer();
 gl.bindRenderbuffer(gl.RENDERBUFFER,rttDepthBuffer);
 gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,w,h);
@@ -396,7 +396,7 @@ gl.bindTexture(gl.TEXTURE_2D,rttComp);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
 gl.generateMipmap(gl.TEXTURE_2D);
-gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,2048,2048,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1024,1024,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
 rttCompBuffer=gl.createRenderbuffer();
 gl.bindRenderbuffer(gl.RENDERBUFFER,rttCompBuffer);
 gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,w,h);
